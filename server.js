@@ -11,7 +11,10 @@ const PORT = process.env.PORT || 8000;
 
 // CORS Configuration - Allow requests from Angular dev server
 const corsOptions = {
-  origin: 'http://localhost:4200',
+    origin: [
+    'http://localhost:4200',
+    'https://tradex-supercoin.vercel.app'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
