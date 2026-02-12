@@ -30,7 +30,6 @@ app.get('/', (req, res) => {
   res.json({ message: 'Server is running!' });
 });
 app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
 
 // 404 Handler
 app.use((req, res) => {
