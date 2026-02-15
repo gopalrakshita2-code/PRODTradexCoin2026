@@ -4,6 +4,6 @@ const userController = require('../controllers/userController');
 
 // Private routes
 router.post('/dashboard', userController.dashboard);
-// router.post('/dashboard/trade', userController.trade);
-// router.post('/dashboard/trade/history', userController.tradeHistory);
+router.put('/update-user-data', userController.updateUserData);
+router.post('/trade/history', userController.tradeHistory);
 module.exports = router;
