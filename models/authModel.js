@@ -12,6 +12,7 @@ class User {
       totalWithdrawal: 0,
       todayPnl: 0,
       todayGain: 0,
+      profit:"down",
       holdings: [],
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       updatedAt: admin.firestore.FieldValue.serverTimestamp()
