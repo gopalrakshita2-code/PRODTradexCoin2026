@@ -28,21 +28,20 @@ class AuthController {
     }
   }
 
-  async googleLogin(req, res){
-      try {
-        const user = await authService.googleLogin(req.body);
 
-        return res.status(200).json({
-          success: true,
-          user,
-        });
-      } catch (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.message,
-        });
-      }
-  };
+  async resetPassword(req, res, next) {
+  try {
+    const { email, password, confirmPassword } = req.body;
+    const result = await authService.resetPassword(email, password, confirmPassword);
+    res.status(200).json({
+      success: true,
+      message: 'Password reset successfully',
+      data: result
+    });
+  } catch (error) {
+    next(error);
+  }
+}
 }
 
 module.exports = new AuthController();

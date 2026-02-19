@@ -46,36 +46,25 @@ class AuthService {
 
 }
 
-async googleLogin(payload) {
-  const { email, displayName, photoURL,uid } = payload;
-
-  if (!email) {
-    throw new Error('Email is required');
+async resetPassword(email, password, confirmPassword) {
+  // Validate passwords match
+  if (password !== confirmPassword) {
+    throw new Error('Passwords do not match');
   }
 
-  // 🔍 Check existing user
-  let user = await User.findByEmail(email);
-
-  if (user) {
-    // Update last login only
-    await User.updateLastLogin(email);
-    return user;
+  // Check if user exists
+  const user = await User.findByEmail(email);
+  if (!user) {
+    throw new Error('User not found');
   }
 
-  // 🆕 Create new user
-  const newUser = {
-    email,
-    name: displayName || email, // Use displayName from payload
-    photoUrl: photoURL, // Map photoURL to photoUrl
-    googleId: uid, // Map uid to googleId
-    provider: 'google',
-    lastLogin: new Date(),
-    createdAt: new Date()
+  // Update password
+  await User.updatePassword(email, password);
+  
+  return {
+    message: 'Password reset successfully'
   };
-
-   const createdUser = await User.create(newUser);
-  return createdUser;
-};
+}
 
 }
 module.exports = new AuthService();

@@ -86,6 +86,25 @@ class User {
     
     return userDoc.ref.get();
   }
+
+  static async updatePassword(email, newPassword) {
+    const userQuery = await usersCollection.where('email', '==', email).get();
+    if (userQuery.empty) {
+      throw new Error('User not found');
+    }
+    
+    const userDoc = userQuery.docs[0];
+    await userDoc.ref.update({
+      password: newPassword,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+    });
+    
+    const updatedDoc = await userDoc.ref.get();
+    return {
+      id: updatedDoc.id,
+      ...updatedDoc.data()
+    };
+  }
 }
 
 module.exports = User;
