@@ -22,9 +22,13 @@ class LoanService {
       let fileUrl = null;
       let filePublicId = null;
 
-      if (file) {
-        const result = await cloudinary.uploader.upload(file.path, {
-          folder: 'loan-documents'
+       if (file) {
+        const result = await new Promise((resolve, reject) => {
+          const uploadStream = cloudinary.uploader.upload_stream(
+            { folder: 'loan-documents' },
+            (err, result) => (err ? reject(err) : resolve(result))
+          );
+          uploadStream.end(file.buffer);
         });
 
         fileUrl = result.secure_url;
