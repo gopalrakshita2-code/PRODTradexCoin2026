@@ -10,7 +10,8 @@ function apiRateLimiter() {
         return res.status(401).json({ message: "Unauthenticated" });
       }
       // Firestore doc IDs can't contain '/', so normalize route
-      const route = (req.route && req.route.path) ? req.route.path.replace(/\//g, '_') : 'add_loan';
+      const pathSegment = (req.route && req.route.path) ? req.route.path : (req.path && req.path.slice(1));
+      const route = pathSegment ? pathSegment.replace(/\//g, '_') : 'default';
       const docId = `${email}_${route}`;
       const ref = db.collection("apiCooldowns").doc(docId);
       const now = Date.now();
@@ -33,7 +34,7 @@ function apiRateLimiter() {
     } catch (err) {
       if (err.message === "COOLDOWN") {
         return res.status(429).json({
-          message: "Today's loan application limit has been reached. Please try again tomorrow.",
+          message: "Today's usage limit has been reached. Please try again tomorrow.",
         });
       }
       next(err);
