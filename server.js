@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 8000;
 const corsOptions = {
     origin: [
     'http://localhost:4200',
-    'https://tradex-supercoin.vercel.app'
+    'https://tradex-supercoin.vercel.app',
+    'https://www.tradexcoinpro.com',
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
