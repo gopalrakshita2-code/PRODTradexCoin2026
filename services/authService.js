@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/authModel');
+const { generateToken } = require('../utils/jwt');
 
 class AuthService {
   async register(email, password, name) {
@@ -29,11 +30,7 @@ class AuthService {
     if (!user) {
       throw new Error('User not found');
     }
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
-    );
+    const token = generateToken(user);
     return {
       user: {
         id: user.id,
