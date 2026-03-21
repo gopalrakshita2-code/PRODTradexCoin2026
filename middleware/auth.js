@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '30s';
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '3h';
 
 if (!JWT_SECRET) {
   console.warn('JWT_SECRET is not set; auth middleware will reject all requests.');
