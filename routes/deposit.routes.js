@@ -4,7 +4,7 @@ const { authenticate } = require('../middleware/auth');
 const router = express.Router();
 
 // routes
-router.post('/create', depositController.createDeposit);
-router.post('/list', depositController.getDepositsByUser);
+router.post('/create',authenticate, depositController.createDeposit);
+router.post('/list', authenticate, depositController.getDepositsByUser);
 
 module.exports = router;
