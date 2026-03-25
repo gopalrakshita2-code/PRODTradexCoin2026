@@ -5,6 +5,7 @@ require('./config/firebase/firebase');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const AIRoutes = require('./routes/AIRoutes')
+const depositRoutes = require('./routes/deposit.routes');
 
 
 const app = express();
@@ -34,6 +35,8 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/ai-trade', AIRoutes);
+app.use('/api/deposit', depositRoutes);
+
 // 404 Handler
 app.use((req, res) => {
   res.status(404).json({ 
