@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const AIRoutes = require('./routes/AIRoutes')
 const depositRoutes = require('./routes/deposit.routes');
+const withdrawRoutes = require('./routes/withdraw.routes');
 
 
 const app = express();
@@ -36,6 +37,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/ai-trade', AIRoutes);
 app.use('/api/deposit', depositRoutes);
+app.use('/api/withdraw', withdrawRoutes);
 
 // 404 Handler
 app.use((req, res) => {
