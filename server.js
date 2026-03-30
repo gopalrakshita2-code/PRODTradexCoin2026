@@ -7,6 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const AIRoutes = require('./routes/AIRoutes')
 const depositRoutes = require('./routes/deposit.routes');
 const withdrawRoutes = require('./routes/withdraw.routes');
+const spotTradeRoutes = require('./routes/spotTrade.routes');
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/ai-trade', AIRoutes);
 app.use('/api/deposit', depositRoutes);
 app.use('/api/withdraw', withdrawRoutes);
+app.use('/api/spot-trade', spotTradeRoutes);
 
 // 404 Handler
 app.use((req, res) => {
